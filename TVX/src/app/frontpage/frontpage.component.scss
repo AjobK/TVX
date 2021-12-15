@@ -1,0 +1,177 @@
+@import '../../styles.scss';
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+
+    .splash {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 600px;
+        width: 100%;
+
+        > img {
+            max-height: 350px;
+            margin-bottom: 20px;
+        }
+
+        > h1 {
+            color: white;
+            font-size: 2em;
+        }
+
+        > p {
+            text-align: center;
+            color: rgba(white, 0.5);
+            line-height: 2em;
+            margin: 30px 0;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+
+        > p {
+            color: white;
+            font-weight: bold;
+            margin: 0 20px;
+            pointer-events: none;
+        }
+
+        > button {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 100vh;
+            background-color: rgba(white, 0.8);
+            font-size: 2em;
+            transition: 0.2s;
+            position: relative;
+
+            &.endButton {
+                color: white;
+                background-color: $reddish;
+
+                &::after {
+                    white-space: nowrap;
+                    content: 'Uitpakken maar!' !important;
+                }
+
+                &:hover {
+                    background-color: $reddish !important;
+                }
+            }
+
+            &::after, &::before {
+                position: absolute;
+                color: white;
+                top: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                font-size: 0.5em;
+                pointer-events: none;
+                opacity: 0;
+                transition: 0.2s;
+            }
+
+            &:disabled {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            &:not(:disabled) {
+                &:hover {
+                    background-color: white;
+                }
+
+                &:first-child {
+                    &:hover {
+                        &::before {
+                            opacity: 1;
+                        }
+                    }
+
+                    &::before {
+                        content: 'Terug';
+                        left: 0;
+                        padding-right: 10px;
+                        transform: translateX(-100%);
+                    }
+                }
+
+                &:last-child {
+                    &:hover {
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+
+                    &::after {
+                        content: 'Volgende';
+                        right: 0;
+                        padding-left: 10px;
+                        transform: translateX(100%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// SNOWFLAKE STUFF
+
+.snow {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.snowflake {
+    --size: 1vw;
+    width: var(--size);
+    height: var(--size);
+    background: rgba(white, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: -5vh;
+  }
+  
+  @keyframes snowfall {
+    0% {
+      transform: translate3d(var(--left-ini), 0, 0);
+    }
+    100% {
+      transform: translate3d(var(--left-end), 110vh, 0);
+    }
+  }
+  
+  @for $i from 1 through 50 {
+    .snowflake:nth-child(#{$i}) {
+      --size: #{random(5) * 0.2}vw;
+      --left-ini: #{random(20) - 10}vw;
+      --left-end: #{random(20) - 10}vw;
+      left: #{random(100)}vw;
+      animation: snowfall #{5 + random(10)}s linear infinite;
+      animation-delay: -#{random(10)}s;
+    }
+  }
+  
+  /* added small blur every 6 snowflakes*/
+  .snowflake:nth-child(6n) {
+    filter: blur(1px);
+  }
+  

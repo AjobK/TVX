@@ -1,0 +1,27 @@
+<main>
+    <div class='snow'>
+        <div *ngFor='let snowflake of this.snowflakes' class='snowflake'>
+            <!-- Contains snowflakes -->
+        </div>
+    </div>
+    <section class='splash'>
+        <img src='../../assets/pictures/{{ this.views[viewIndex].image }}.png' />
+        <h1 [innerText]='this.views[viewIndex].title'></h1>
+        <p [innerText]='this.views[viewIndex].description'></p>
+    </section>
+    <section class='buttons'>
+        <button
+            [disabled]='this.viewIndex <= 0'
+            (click)='changePage(-1)'
+        >{{ '<' }}</button>
+        <p>{{ this.viewIndex+1 }} / {{ this.views.length }}</p>
+        <button
+            [ngClass]='{ "endButton": this.viewIndex == this.views.length-1 }'
+            [disabled]='this.viewIndex >= this.views.length'
+            (click)='changePage(1)'
+        >{{ '>' }}</button>
+    </section>
+    <!-- <section class='endInput'>
+        <input type='text'>
+    </section> -->
+</main>
