@@ -24,7 +24,7 @@ export class FrontpageComponent implements OnInit {
       title: 'Opdracht - Zoeken in alle hoeken',
       description:
       ` Als het goed is liggen in de doos voor je niet alleen roze letters.
-        Vorm samen met de gele letters en de letters hieronder een zin.
+        Vorm samen met de groene letters en de letters hieronder een zin.
         Bestaat je antwoord uit 3 woorden? Vul deze dan in.
         `,
       answer: 'tijd voor kerst',
@@ -68,17 +68,17 @@ export class FrontpageComponent implements OnInit {
         Deze is moeilijk, je raadt 'm nooit,
         Wie is het leukste vriendje ooit?
 
-        ( PS: Ik niet hoor, vraag maar aan de kerstvrouw ;) )
+        ( Behalve de kerstman natuurlijk 😉 )
       `,
       answer: 'Ajob',
       finished: false
     },
     {
       image: 'cadeau.png',
-      title: '🎅 Surprise! 🎅',
+      title: '🎁 Surprise! 🎁',
       description:
       ` De kerstman heeft zijn best gedaan,
-        maar inmiddels moet hij verder gaan.
+        Maar inmiddels moet hij verder gaan.
         Geniet van je welverdiende cadeau,
         Woorden, puzzels, je doet het zo!
 
