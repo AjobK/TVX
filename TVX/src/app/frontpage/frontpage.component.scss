@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
 @import '../../styles.scss';
 
 main {
@@ -29,13 +30,74 @@ main {
 
         > p {
             text-align: center;
-            color: rgba(white, 0.5);
+            color: rgba(white, 0.6);
             line-height: 2em;
             margin: 30px 0;
+            text-shadow: 0 0 10px $background-color-secondary;
+        }
+
+        .context {
+            >div {
+                margin-bottom: 40px;
+
+                &.letters {
+                    display: flex;
+                    font-family: 'Fuzzy Bubbles', arial;
+                    font-weight: 700;
+                    border-radius: 5px;
+
+                    > span {
+                        background-color: $reddish;
+                        color: white;
+                        border: 1px solid white;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 40px;
+                        height: 40px;
+                        padding-top: 5px;
+                        font-size: 1.6em;
+                        line-height: 1.6em;
+                        border-radius: 3px;
+                        font-weight: bold;
+
+                        &:not(:last-child) {  
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+
+            > input {
+                outline: none;
+                width: 100%;
+                max-width: 400px;
+                min-width: 250px;
+                letter-spacing: 1px;
+                color: white;
+                border: none;
+                background-color: transparent;
+                font-size: 1em;
+                padding: 10px;
+                margin-bottom: 20px;
+                transition: 0.2s;
+                border-bottom: 2px solid white;
+                opacity: 0.5;
+    
+                &::placeholder {
+                    color: rgba(white, 0.5);
+                }
+
+                &:focus {
+                    opacity: 1;
+                }
+            }
         }
     }
 
     .buttons {
+        position: fixed;
+        bottom: 40px;
         display: flex;
         align-items: center;
 
@@ -53,9 +115,17 @@ main {
             border: none;
             border-radius: 100vh;
             background-color: rgba(white, 0.8);
-            font-size: 2em;
             transition: 0.2s;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > .icon {
+                width: initial;
+                height: initial;
+                font-size: 2em;
+            }
 
             &.endButton {
                 color: white;
@@ -78,14 +148,14 @@ main {
                 bottom: 0;
                 display: flex;
                 align-items: center;
-                font-size: 0.5em;
+                font-size: 1.2em;
                 pointer-events: none;
                 opacity: 0;
                 transition: 0.2s;
             }
 
             &:disabled {
-                opacity: 0;
+                opacity: 0.25;
                 pointer-events: none;
             }
 
@@ -128,6 +198,16 @@ main {
     }
 }
 
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
+}
+
 // SNOWFLAKE STUFF
 
 .snow {
@@ -148,30 +228,29 @@ main {
     border-radius: 50%;
     position: absolute;
     top: -5vh;
-  }
+}
   
-  @keyframes snowfall {
+@keyframes snowfall {
     0% {
-      transform: translate3d(var(--left-ini), 0, 0);
+        transform: translate3d(var(--left-ini), 0, 0);
     }
     100% {
-      transform: translate3d(var(--left-end), 110vh, 0);
+        transform: translate3d(var(--left-end), 110vh, 0);
     }
-  }
+}
   
-  @for $i from 1 through 50 {
+@for $i from 1 through 50 {
     .snowflake:nth-child(#{$i}) {
-      --size: #{random(5) * 0.2}vw;
-      --left-ini: #{random(20) - 10}vw;
-      --left-end: #{random(20) - 10}vw;
-      left: #{random(100)}vw;
-      animation: snowfall #{5 + random(10)}s linear infinite;
-      animation-delay: -#{random(10)}s;
+        --size: #{random(5) * 0.2}vw;
+        --left-ini: #{random(20) - 10}vw;
+        --left-end: #{random(20) - 10}vw;
+        left: #{random(100)}vw;
+        animation: snowfall #{5 + random(10)}s linear infinite;
+        animation-delay: -#{random(10)}s;
     }
-  }
+}
   
-  /* added small blur every 6 snowflakes*/
-  .snowflake:nth-child(6n) {
+/* added small blur every 6 snowflakes*/
+.snowflake:nth-child(6n) {
     filter: blur(1px);
-  }
-  
+}
