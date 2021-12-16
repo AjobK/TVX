@@ -72,6 +72,19 @@ export class FrontpageComponent implements OnInit {
       `,
       answer: 'Ajob',
       finished: false
+    },
+    {
+      image: 'cadeau.png',
+      title: '🎅 Surprise! 🎅',
+      description:
+      ` De kerstman heeft zijn best gedaan,
+        maar inmiddels moet hij verder gaan.
+        Geniet van je welverdiende cadeau,
+        Woorden, puzzels, je doet het zo!
+
+        Kijk eens achter het grote scherm...
+      `,
+      finished: true
     }
   ]
 

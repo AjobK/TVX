@@ -6,7 +6,7 @@
     </div>
     <section class='splash'>
         <img src='../../assets/pictures/splashImages/{{ this.views[viewIndex].image }}' draggable='false'/>
-        <h1 [innerHTML]='this.views[viewIndex].title'></h1>
+        <h1 [innerText]='this.views[viewIndex].title'></h1>
         <p [innerHTML]='this.views[viewIndex].description'></p>
         <div class='context' *ngIf='this.views[viewIndex].answer'>
             <div *ngIf='this.views[viewIndex].context?.letters' class='letters'>
@@ -23,6 +23,7 @@
     </section>
     <section class='buttons'>
         <button
+            [ngClass]='{ notVisible: this.viewIndex <= 0 }'
             [disabled]='this.viewIndex <= 0'
             (click)='changePage(-1)'
         >
@@ -30,11 +31,11 @@
         </button>
         <p class='noselect'>{{ this.viewIndex+1 }} / {{ this.views.length }}</p>
         <button
-            [ngClass]='{ endButton: this.viewIndex == this.views.length-1 }'
+            [ngClass]='{ endButton: this.viewIndex >= this.views.length-2, notVisible: this.viewIndex >= this.views.length-1 }'
             [disabled]='this.viewIndex >= this.views.length || !this.views[this.viewIndex].finished'
             (click)='changePage(1)'
         >
-            <mat-icon class='icon'>{{ this.viewIndex == this.views.length-1 ? 'redeem' : 'arrow_forward' }}</mat-icon>
+            <mat-icon class='icon'>{{ this.viewIndex >= this.views.length-2 ? 'redeem' : 'arrow_forward' }}</mat-icon>
         </button>
     </section>
 </main>

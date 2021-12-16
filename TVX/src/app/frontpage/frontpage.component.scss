@@ -142,6 +142,11 @@ main {
                 font-size: 2em;
             }
 
+            &.notVisible {
+                opacity: 0 !important;
+                pointer-events: none;
+            }
+
             &.endButton {
                 color: white;
                 background-color: $reddish;
