@@ -30,6 +30,7 @@ export class FrontpageComponent implements OnInit {
       context: {
         letters: ['J', 'K', 'T', 'V', 'O', 'D', 'R']
       },
+      answer: 'tijd voor kerst',
       finished: false
     },
     {
@@ -49,12 +50,12 @@ export class FrontpageComponent implements OnInit {
     // audio.play();
 
     // TODO: Remove this
-    this.views = this.views.map((i: any) => {
-      i.description = i.description.split('\n').join('<br />')
-      i.finished = true
+    // this.views = this.views.map((i: any) => {
+    //   i.description = i.description.split('\n').join('<br />')
+    //   i.finished = true
 
-      return i
-    })
+    //   return i
+    // })
   }
 
   changePage(byAmount: number): void {
@@ -65,7 +66,10 @@ export class FrontpageComponent implements OnInit {
   }
 
   submitAnswer(event: any) {
-    console.log(event.target.value)
+    let { value } = event.target
+
+    if (value.toLowerCase() === this.views[this.viewIndex].answer)
+      this.views[this.viewIndex].finished = true
   }
 
   ngOnInit(): void {

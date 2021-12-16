@@ -12,7 +12,13 @@
             <div *ngIf='this.views[viewIndex].context?.letters' class='letters'>
                 <span *ngFor='let letter of this.views[viewIndex].context.letters' class='noselect'>{{ letter }}</span>
             </div>
-            <input type='text' placeholder='Antwoord' (keyup.enter)='this.submitAnswer($event)' />
+            <input
+                [disabled]='this.views[viewIndex].finished'
+                value='{{ this.views[viewIndex].finished ? "🎅 " + this.views[viewIndex].answer : "" }}'
+                type='text'
+                placeholder='Antwoord'
+                (keyup.enter)='this.submitAnswer($event)'
+            />
         </div>
     </section>
     <section class='buttons'>
@@ -31,7 +37,4 @@
             <mat-icon class='icon'>arrow_forward</mat-icon>
         </button>
     </section>
-    <!-- <section class='endInput'>
-        <input type='text'>
-    </section> -->
 </main>

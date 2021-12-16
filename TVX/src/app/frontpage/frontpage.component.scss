@@ -37,7 +37,7 @@ main {
         }
 
         .context {
-            >div {
+            > div {
                 margin-bottom: 40px;
 
                 &.letters {
@@ -89,6 +89,12 @@ main {
                 }
 
                 &:focus {
+                    opacity: 1;
+                }
+
+                &:disabled {
+                    color: limegreen;
+                    border-bottom-color: limegreen;
                     opacity: 1;
                 }
             }
