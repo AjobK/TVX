@@ -5,10 +5,10 @@
         </div>
     </div>
     <section class='splash'>
-        <img src='../../assets/pictures/splashImages/{{ this.views[viewIndex].image }}.svg' draggable='false'/>
+        <img src='../../assets/pictures/splashImages/{{ this.views[viewIndex].image }}' draggable='false'/>
         <h1 [innerHTML]='this.views[viewIndex].title'></h1>
         <p [innerHTML]='this.views[viewIndex].description'></p>
-        <div class='context' *ngIf='this.views[viewIndex].context'>
+        <div class='context' *ngIf='this.views[viewIndex].answer'>
             <div *ngIf='this.views[viewIndex].context?.letters' class='letters'>
                 <span *ngFor='let letter of this.views[viewIndex].context.letters' class='noselect'>{{ letter }}</span>
             </div>
@@ -34,7 +34,7 @@
             [disabled]='this.viewIndex >= this.views.length || !this.views[this.viewIndex].finished'
             (click)='changePage(1)'
         >
-            <mat-icon class='icon'>arrow_forward</mat-icon>
+            <mat-icon class='icon'>{{ this.viewIndex == this.views.length-1 ? 'redeem' : 'arrow_forward' }}</mat-icon>
         </button>
     </section>
 </main>

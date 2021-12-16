@@ -71,7 +71,7 @@ main {
             > input {
                 outline: none;
                 width: 100%;
-                max-width: 400px;
+                max-width: 600px;
                 min-width: 250px;
                 letter-spacing: 1px;
                 color: white;
@@ -83,6 +83,15 @@ main {
                 transition: 0.2s;
                 border-bottom: 2px solid white;
                 opacity: 0.5;
+
+                &.error {
+                    border-color: $reddish;
+                    color: $reddish;
+
+                    &::placeholder {
+                        color: $reddish;
+                    }
+                }
     
                 &::placeholder {
                     color: rgba(white, 0.5);
