@@ -87,11 +87,16 @@ export class FrontpageComponent implements OnInit {
       finished: true
     }
   ]
+  @Output() isChangingPage: boolean = false
+
+  ambienceAudio: HTMLAudioElement = new Audio()
 
   constructor() {
-    // let audio = new Audio('audio_file.mp3');
-    // audio.play();
-
+    this.ambienceAudio.volume = 0.2
+    this.ambienceAudio.src = '../../assets/audio/ambient.mp3'
+    window.addEventListener('load', () => {
+      this.ambienceAudio.play()
+    })
     // TODO: Remove this
     this.views = this.views.map((i: any) => {
       i.description = i.description.split('\n').join('<br />')
@@ -102,8 +107,13 @@ export class FrontpageComponent implements OnInit {
   }
 
   changePage(byAmount: number): void {
-    if (this.viewIndex + byAmount < this.views.length)
-      this.viewIndex += byAmount
+    if (this.viewIndex + byAmount < this.views.length) {
+      this.isChangingPage = true
+      setTimeout(() => {
+        this.viewIndex += byAmount
+        this.isChangingPage = false
+      }, 1000)
+    }
   }
 
   submitAnswer(event: any) {

@@ -4,7 +4,7 @@
             <!-- Contains snowflakes -->
         </div>
     </div>
-    <section class='splash'>
+    <section class='splash' [ngClass]='{ hide: this.isChangingPage }'>
         <img src='../../assets/pictures/splashImages/{{ this.views[viewIndex].image }}' draggable='false'/>
         <h1 [innerText]='this.views[viewIndex].title'></h1>
         <p [innerHTML]='this.views[viewIndex].description'></p>
