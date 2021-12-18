@@ -92,23 +92,36 @@ export class FrontpageComponent implements OnInit {
   ambienceAudio: HTMLAudioElement = new Audio()
 
   constructor() {
-    this.ambienceAudio.volume = 0.2
-    this.ambienceAudio.src = '../../assets/audio/ambient.mp3'
-    window.addEventListener('load', () => {
-      this.ambienceAudio.play()
-    })
+    window.addEventListener('load', this.startAmbienceAudio)
+
     // TODO: Remove this
     this.views = this.views.map((i: any) => {
       i.description = i.description.split('\n').join('<br />')
-      i.finished = true
+      // i.finished = true
 
       return i
     })
   }
 
+  startAmbienceAudio = () => {
+    this.ambienceAudio.volume = 0.2
+    this.ambienceAudio.loop = true
+    this.ambienceAudio.src = '../../assets/audio/ambient.mp3'
+    this.ambienceAudio.play()
+  }
+
   changePage(byAmount: number): void {
     if (this.viewIndex + byAmount < this.views.length) {
       this.isChangingPage = true
+
+      if (this.viewIndex + byAmount >= this.views.length-1) {
+        this.ambienceAudio.src = '../../assets/audio/bubblegum_kk.mp3'
+        this.ambienceAudio.play()
+      } else if (!this.ambienceAudio.src.endsWith('ambient.mp3')) {
+        this.ambienceAudio.src = '../../assets/audio/ambient.mp3'
+        this.ambienceAudio.play()
+      }
+
       setTimeout(() => {
         this.viewIndex += byAmount
         this.isChangingPage = false
