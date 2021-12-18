@@ -32,7 +32,7 @@
         <p class='noselect'>{{ this.viewIndex+1 }} / {{ this.views.length }}</p>
         <button
             [ngClass]='{ endButton: this.viewIndex >= this.views.length-2, notVisible: this.viewIndex >= this.views.length-1 }'
-            [disabled]='this.viewIndex >= this.views.length || !this.views[this.viewIndex].finished'
+            [disabled]='this.viewIndex >= this.views.length || !this.views[this.viewIndex].finished || this.isChangingPage'
             (click)='changePage(1)'
         >
             <mat-icon class='icon'>{{ this.viewIndex >= this.views.length-2 ? 'redeem' : 'arrow_forward' }}</mat-icon>
