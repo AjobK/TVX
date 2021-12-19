@@ -24,7 +24,7 @@ export class FrontpageComponent implements OnInit {
       title: 'Opdracht - Zoeken in alle hoeken',
       description:
       ` Als het goed is liggen in de doos voor je niet alleen roze letters.
-        Vorm samen met de groene letters en de letters hieronder een zin.
+        Vorm samen met de gele letters en de letters hieronder een zin.
         Bestaat je antwoord uit 3 woorden? Vul deze dan in.
       `,
       answer: 'tijd voor kerst',
