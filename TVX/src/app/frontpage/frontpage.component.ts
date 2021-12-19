@@ -26,8 +26,11 @@ export class FrontpageComponent implements OnInit {
       ` Als het goed is liggen in de doos voor je niet alleen roze letters.
         Vorm samen met de groene letters en de letters hieronder een zin.
         Bestaat je antwoord uit 3 woorden? Vul deze dan in.
-        `,
+      `,
       answer: 'tijd voor kerst',
+      context: {
+        letters: [ 'J', 'O', 'K', 'V', 'R', 'T' ]
+      },
       finished: false
     },
     {
@@ -92,12 +95,12 @@ export class FrontpageComponent implements OnInit {
   ambienceAudio: HTMLAudioElement = new Audio()
 
   constructor() {
-    window.addEventListener('load', this.startAmbienceAudio)
+    console.log('%cHo ho ho!\n\nNiet vals spelen hè! 😉', 'color:red; font-size: 36px;');
 
-    // TODO: Remove this
+    this.startAmbienceAudio()
+
     this.views = this.views.map((i: any) => {
       i.description = i.description.split('\n').join('<br />')
-      // i.finished = true
 
       return i
     })
@@ -106,8 +109,11 @@ export class FrontpageComponent implements OnInit {
   startAmbienceAudio = () => {
     this.ambienceAudio.volume = 0.2
     this.ambienceAudio.loop = true
+    this.ambienceAudio.autoplay = true
     this.ambienceAudio.src = '../../assets/audio/ambient.mp3'
     this.ambienceAudio.play()
+
+    window.removeEventListener('mousemove', this.startAmbienceAudio)
   }
 
   changePage(byAmount: number): void {
