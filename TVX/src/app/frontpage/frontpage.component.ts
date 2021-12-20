@@ -71,7 +71,7 @@ export class FrontpageComponent implements OnInit {
         Hopelijk ben je niet alles vergeten,
         Cowclicker zit in het korte verleden.
         Wat staat er na deze code in de console?
-        Op je antwoord doe ik een strenge controle!
+        Op je antwoord doe ik een PRECIEZE controle!
       `,
       answer: 'De kerstman is dit jaar 319 euro armer...',
       finished: false
@@ -118,8 +118,6 @@ export class FrontpageComponent implements OnInit {
 
     this.views = this.views.map((i: any) => {
       i.description = i.description.split('\n').join('<br />')
-
-      i.finished = true
 
       return i
     })
