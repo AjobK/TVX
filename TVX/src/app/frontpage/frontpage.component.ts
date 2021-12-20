@@ -25,9 +25,9 @@ export class FrontpageComponent implements OnInit {
       description:
       ` Als het goed is liggen in de doos voor je niet alleen roze letters.
         Vorm samen met de gele letters en de letters hieronder een zin.
-        Bestaat je antwoord uit 3 woorden? Vul deze dan in.
+        Bestaat je antwoord uit 3 woorden? Vul deze dan in!
       `,
-      answer: 'tijd voor kerst',
+      answer: 'Tijd voor kerst',
       context: {
         letters: [ 'J', 'O', 'K', 'V', 'R', 'T' ]
       },
@@ -45,7 +45,21 @@ export class FrontpageComponent implements OnInit {
         Gooi het nou weg en vermijd het gevaar,
         Van het monster dat is bedekt met haar.
       `,
-      answer: 'dagobert',
+      answer: 'Dagobert',
+      finished: false
+    },
+    {
+      image: 'hans.png',
+      title: 'Opdracht - Hans maakt geen kans',
+      description:
+      ` Samen met je vrienden ga je op weg.
+        Helaas hebben jullie in Miitopia pech!
+        Hans heeft alle gezichten verborgen,
+        Maar Daniel de chef die maakt zich geen zorgen.
+        De dappere chef die heeft spontaan een idee,
+        Hij valt Hans aan en die aanval heet ...?
+      `,
+      answer: 'Flambe',
       finished: false
     },
     {
@@ -93,14 +107,19 @@ export class FrontpageComponent implements OnInit {
   @Output() isChangingPage: boolean = false
 
   ambienceAudio: HTMLAudioElement = new Audio()
+  sfxAudio: HTMLAudioElement = new Audio()
 
   constructor() {
+    this.sfxAudio.volume = 0.4
+
     console.log('%cHo ho ho!\n\nNiet vals spelen hè! 😉', 'color:red; font-size: 36px;');
 
     this.startAmbienceAudio()
 
     this.views = this.views.map((i: any) => {
       i.description = i.description.split('\n').join('<br />')
+
+      i.finished = true
 
       return i
     })
@@ -114,6 +133,18 @@ export class FrontpageComponent implements OnInit {
     this.ambienceAudio.play()
 
     window.removeEventListener('mousemove', this.startAmbienceAudio)
+  }
+
+  playSFX = (filename: string) => {
+    this.sfxAudio.src = `../../assets/audio/${ filename }.mp3`
+    this.sfxAudio.play()
+  }
+
+  setEndBackground(isAtEnd: boolean) {
+    if (isAtEnd)
+      document.body.style.backgroundImage = 'url(\'https://media4.giphy.com/media/h8ISB2nUVITEWjVgGo/200.gif\')'
+    else
+      document.body.style.backgroundImage = ''
   }
 
   changePage(byAmount: number): void {
@@ -131,6 +162,7 @@ export class FrontpageComponent implements OnInit {
       setTimeout(() => {
         this.viewIndex += byAmount
         this.isChangingPage = false
+        this.setEndBackground(!!(this.viewIndex >= this.views.length - 1))
       }, 1000)
     }
   }
@@ -141,8 +173,10 @@ export class FrontpageComponent implements OnInit {
 
     if (value.toLowerCase() === this.views[this.viewIndex].answer.toLowerCase()) {
       this.views[this.viewIndex].finished = true
+      this.playSFX('correct')
     } else if ([...event.target.classList].indexOf(errorClass) == -1) {
       event.target.classList.add(errorClass)
+      this.playSFX('incorrect')
 
       setTimeout(() => {
         event.target.classList.remove(errorClass)

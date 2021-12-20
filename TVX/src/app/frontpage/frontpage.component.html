@@ -1,4 +1,8 @@
-<main>
+<main
+    [ngClass]='{ reachedEnd: this.viewIndex >= this.views.length-1 }'
+>
+    <img src='../../assets/pictures/isabelle.gif' draggable='false' class='mascot' />
+    <img src='../../assets/pictures/isabelle.gif' draggable='false' class='mascot' />
     <div class='snow'>
         <div *ngFor='let snowflake of this.snowflakes' class='snowflake'>
             <!-- Contains snowflakes -->
@@ -24,7 +28,7 @@
     <section class='buttons'>
         <button
             [ngClass]='{ notVisible: this.viewIndex <= 0 }'
-            [disabled]='this.viewIndex <= 0'
+            [disabled]='this.viewIndex <= 0 || this.isChangingPage'
             (click)='changePage(-1)'
         >
             <mat-icon class='icon'>arrow_back</mat-icon>

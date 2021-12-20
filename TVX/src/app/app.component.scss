@@ -8,4 +8,6 @@
 
 body {
     background: linear-gradient($background-color, $background-color-secondary);
+    background-position: center;
+    background-size: cover;
 }

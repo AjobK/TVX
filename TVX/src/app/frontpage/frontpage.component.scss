@@ -10,6 +10,38 @@ main {
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
 
+    .mascot {
+        position: fixed;
+        height: 500px;
+        display: none;
+
+        &:nth-of-type(1) {
+            left: 50px;
+            transform: scaleX(-1);
+        }
+
+        &:nth-of-type(2) {
+            right: 50px;
+        }
+    }
+
+    &.reachedEnd {
+        @media only screen and (min-width: 1350px) {
+            .mascot {
+                display: initial;
+            }
+        }
+
+        .splash {
+            > img {
+                max-height: 280px;
+                animation: pulse 2s ease-in-out infinite;
+                border: 5px dashed white;
+                padding: 10px;
+            }
+        }
+    }
+
     .splash {
         display: flex;
         justify-content: center;
@@ -236,14 +268,36 @@ main {
 
 // SNOWFLAKE STUFF
 
-.snow {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    pointer-events: none;
-    z-index: -1;
+main {
+    .snow {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        pointer-events: none;
+        z-index: -1;
+    }  
+
+    &.reachedEnd {
+        background-color: rgba($background-color-secondary, 0.8);
+
+        > .snow {
+            z-index: 0;
+
+            > .snowflake {
+                &:nth-child(3n + 1) {
+                    background: rgb(255, 118, 118);
+                }
+                &:nth-child(3n + 2) {
+                    background: rgb(156, 241, 156);
+                }
+                &:nth-child(3n + 3) {
+                    background: rgb(106, 106, 255);
+                }
+            }
+        }
+    }
 }
 
 .snowflake {
@@ -279,4 +333,24 @@ main {
 /* added small blur every 6 snowflakes*/
 .snowflake:nth-child(6n) {
     filter: blur(1px);
+}
+
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1) rotate(0deg) translateY(-20%);
+    }
+    25% {
+       transform: scale(0.8) rotate(5deg);
+    }
+    50% {
+       transform: scale(1) rotate(0deg) translateY(-20%);
+    }
+    75% {
+       transform: scale(0.8) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg) translateY(-20%);
+    }
 }
